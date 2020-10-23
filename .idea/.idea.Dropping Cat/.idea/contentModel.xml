@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Dropping Cat.1652372007.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Fonts" t="Include">
+          <e p="LuckiestGuy" t="Include">
+            <e p="LICENSE.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="AutoObject.cs" t="Include" />
+          <e p="CentralController.cs" t="Include" />
+          <e p="Enemy.cs" t="Include" />
+          <e p="LightTank.cs" t="Include" />
+          <e p="MainCamera.cs" t="Include" />
+          <e p="Panzer.cs" t="Include" />
+          <e p="Person.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="PoiSystem.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Dropping Cat.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp/bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
