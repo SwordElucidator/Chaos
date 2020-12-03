@@ -9,9 +9,9 @@ public class Enemy : Person
     public float maxAutoChangeDirectionTime = 5f;
     
     private Vector2 _currentMovement = new Vector2();
-    private float _autoChangeDirectionTime = 2f;
+    private float _autoChangeDirectionTime = 0.5f;
 
-    void PostStart()
+    protected override void PostStart()
     {
         _autoChangeDirectionTime = Random.Range(0, maxAutoChangeDirectionTime);
     }
@@ -28,7 +28,8 @@ public class Enemy : Person
         if (_autoChangeDirectionTime < 0)
         {
             _autoChangeDirectionTime = Random.Range(0, maxAutoChangeDirectionTime);
-            if ((poi.position - transform.position).magnitude >= poi.lossyScale.x * 0.8)  // 危险
+            var spsize = poi.GetComponent<SpriteMask>().bounds.size.x / 2;
+            if ((poi.position - transform.position).magnitude >= spsize * 0.8)  // 危险
             {
                 var dis = poi.position - transform.position;
                 _currentMovement = (new Vector2(dis.x, dis.y).normalized + new Vector2(Random.Range(-0.15f, 0.15f), 0)).normalized;

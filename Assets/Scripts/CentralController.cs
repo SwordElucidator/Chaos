@@ -12,6 +12,7 @@ public class CentralController : MonoBehaviour
 
     public bool Win()
     {
+        if (player.hp <= 0) return false;
         foreach (var enemy in enemies)
         {
             if (enemy.hp > 0)

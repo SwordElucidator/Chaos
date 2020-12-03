@@ -24,6 +24,11 @@ public class AutoObject : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.mass = mass;
         _autoChangeDirectionTime = autoChangeDirectionTime;
+        ExtraStart();
+    }
+
+    protected virtual void ExtraStart()
+    {
     }
 
     // Update is called once per frame

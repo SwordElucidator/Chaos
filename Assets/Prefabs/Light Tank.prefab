@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: d4cadfaa720b34740a8bf517698b1040, type: 3}
   m_Color: {r: 1, g: 0.41037738, b: 0.41037738, a: 1}
   m_FlipX: 0
@@ -150,7 +150,7 @@ FrictionJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 6.41, y: -10.15}
+  m_ConnectedAnchor: {x: 25.08, y: -10.15}
   m_MaxForce: 10
   m_MaxTorque: 1
 --- !u!114 &3674274020269846684
@@ -166,14 +166,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 2
-  speed: 8
+  speed: 6
   moveForce: 200
   autoChangeDirectionTime: 5
   hitForce: 500
   poi: {fileID: 0}
   hitEdge1: {fileID: 3674274021504786658}
   hitEdge2: {fileID: 3674274020921316768}
-  superFacingHitForce: 2000
+  superFacingHitForce: 1200
 --- !u!1 &3674274020921316769
 GameObject:
   m_ObjectHideFlags: 0

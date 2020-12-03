@@ -105,7 +105,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: d4cadfaa720b34740a8bf517698b1040, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -179,7 +179,7 @@ FrictionJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 6.41, y: -4.04}
+  m_ConnectedAnchor: {x: 34, y: 26.7}
   m_MaxForce: 10
   m_MaxTorque: 1
 --- !u!114 &7194192139434134028
@@ -200,3 +200,7 @@ MonoBehaviour:
   autoChangeDirectionTime: 5
   hitForce: 500
   poi: {fileID: 0}
+  bulletGroupSize: 5
+  innerInterval: 0.2
+  outerInterval: 2
+  muzzle: {fileID: 7194192138853171176}

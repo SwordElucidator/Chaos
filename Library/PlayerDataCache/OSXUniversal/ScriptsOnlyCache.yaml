@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Bullet
     - CentralController
     - Enemy
     - LightTank
@@ -8,6 +9,7 @@ ScriptsOnlyBuild:
     - Panzer
     - Player
     - PoiSystem
+    - Pool
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.SpriteShape.Editor.dll:
@@ -79,6 +81,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 30304}
     - Class: 114
       Script: {instanceID: 36464}
+    - Class: 114
+      Script: {instanceID: 40434}
+    - Class: 114
+      Script: {instanceID: 41148}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -620,7 +626,7 @@ ScriptsOnlyBuild:
     className: AutoObject
   - hash:
       serializedVersion: 2
-      Hash: ec60b120f456d814f845937433eeaace
+      Hash: a1c2e8f36b60bc9d13f2eb00cf92b597
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Panzer
@@ -636,6 +642,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CentralController
+  - hash:
+      serializedVersion: 2
+      Hash: 16e5fb5fee4d9050e6875a1b61ffec55
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Bullet
+  - hash:
+      serializedVersion: 2
+      Hash: 2c50ba461c9b78ac09e8e0d20ae8b30d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Pool
   platform: 2
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

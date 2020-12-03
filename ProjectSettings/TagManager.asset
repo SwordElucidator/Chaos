@@ -7,6 +7,8 @@ TagManager:
   - Poi
   - Human
   - Chengguan
+  - Ground
+  - Collectable
   layers:
   - Default
   - TransparentFX

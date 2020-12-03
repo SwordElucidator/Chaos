@@ -25,11 +25,13 @@ public class Person : MonoBehaviour
     
 
     private bool _isDead = false;
+    private bool _isRespawning = false;
     private bool _canHit = false;
     private int _hitRecoverIndex = 0;
     private bool _isHittedOutOfControl = false; // 撞击失控
     private int _hittedOutOfControlIndex = 0;
     private bool _isImmune = false;
+    private GameObject _superKick = null;
     
     protected Rigidbody2D _rigidbody;
 
@@ -41,11 +43,11 @@ public class Person : MonoBehaviour
         GetComponent<FrictionJoint2D>().maxForce = friction;
         StartCoroutine(RecoverHit(_hitRecoverIndex));
         PostStart();
-        if (isPlayer) central.leftHpText.text = "LEFT " + hp.ToString() + " ❤";
+        if (isPlayer) central.leftHpText.text = "HEART × " + hp;
         StartCoroutine(SetImmune());
     }
 
-    void PostStart()
+    protected virtual void PostStart()
     {
         
     }
@@ -65,6 +67,7 @@ public class Person : MonoBehaviour
         _isImmune = false;
         GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1f);
         GetComponent<CircleCollider2D>().enabled = true;
+        _isRespawning = false;
     }
 
 
@@ -94,32 +97,38 @@ public class Person : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Poi"))
+        if (other.gameObject.CompareTag("Poi") && !_isRespawning)
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
-            _isDead = true;
-            hp -= 1;
+            TriggerDeath();
+        }
+    }
+
+    public void TriggerDeath()
+    {
+        if (_isDead) return;
+        _isDead = true;
+        GetComponent<SpriteRenderer>().color = Color.red;
+        hp -= 1;
+        if (isPlayer)
+            if (isPlayer) central.leftHpText.text = "HEART × " + hp;
+        if (hp > 0)
+        {
+            StartCoroutine(GoRespawn());
+        }
+        else
+        {
+            // GAME OVER
             if (isPlayer)
-            if (isPlayer) central.leftHpText.text = "LEFT " + hp.ToString() + " ❤";
-            if (hp > 0)
             {
-                StartCoroutine(GoRespawn());
+                central.gameOver.SetActive(true);
             }
             else
             {
-                // GAME OVER
-                if (isPlayer)
+                if (central.Win())
                 {
+                    // 玩家赢了！
+                    central.gameOver.GetComponent<Text>().text = "YOU WIN!";
                     central.gameOver.SetActive(true);
-                }
-                else
-                {
-                    if (central.Win())
-                    {
-                        // 玩家赢了！
-                        central.gameOver.GetComponent<Text>().text = "YOU WIN!";
-                        central.gameOver.SetActive(true);
-                    }
                 }
             }
         }
@@ -127,6 +136,7 @@ public class Person : MonoBehaviour
 
     private IEnumerator GoRespawn()
     {
+        _isRespawning = true;
         yield return new WaitForSeconds(3f);
         Respawn();
     }
@@ -197,12 +207,57 @@ public class Person : MonoBehaviour
             // var newDir = Vector3.Reflect(curDir, contactPoint.normal);
             // Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
             // transform.rotation = rotation;
-            print(movement);
-            other.gameObject.GetComponent<Person>().SetHitState(movement * hitForce);
+            if (_superKick)
+            {
+                other.gameObject.GetComponent<Person>().SetHitState(movement * (hitForce * 2));
+                _superKick.transform.parent = Pool.MainPool.transform;
+                _superKick.SetActive(false);
+                Pool.MainPool.ReceiveSuperKick(_superKick);
+                _superKick = null;
+            }
+            else
+            {
+                other.gameObject.GetComponent<Person>().SetHitState(movement * hitForce);
+            }
+            
         }
         _canHit = false;
         canHitObject.SetActive(false);
         _hitRecoverIndex += 1;
         StartCoroutine(RecoverHit(_hitRecoverIndex));  // 重新开始
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        // 捡东西
+        if (other.gameObject.CompareTag("Collectable"))
+        {
+            other.gameObject.GetComponent<CollectableObject>().OnCollection(this);
+        }
+    }
+
+    public void GainHp(int amount)
+    {
+        hp += amount;
+        if (isPlayer) central.leftHpText.text = "HEART × " + hp;
+    }
+
+    public IEnumerator ModifySpeed(int speedChange, int moveForceChange, int time)
+    {
+        speed += speedChange;
+        moveForce += moveForceChange;
+        yield return new WaitForSeconds(time);
+        speed -= speedChange;
+        moveForce -= moveForceChange;
+    }
+
+    public void GainSuperKick()
+    {
+        if (_superKick) return;
+        var superKick = Pool.MainPool.GetSuperKick();
+        _superKick = superKick;
+        _superKick.transform.parent = transform;
+        _superKick.transform.localPosition = new Vector3(0, 0, _superKick.transform.position.z);
+        superKick.SetActive(true);
     }
 }
